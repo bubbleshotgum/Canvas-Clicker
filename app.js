@@ -3,7 +3,7 @@ function dump(elem, num, x, y)
 	elem.style.background = (elem.style.background) ? 
 		'url(assets/backgrounds/' + num + '.png) ' + x + 'px ' + y + 'px no-repeat, ' + elem.style.background : 
 		'url(assets/backgrounds/' + num + '.png) ' + x + 'px ' + y + 'px no-repeat'
-	elem.style.backgroundSize = 'contain' 
+	elem.style.backgroundSize = '25%' 
 }
 
 function _listener(event) {

@@ -19,6 +19,12 @@
 	position: fixed;
 }
 
+main
+{
+	width: 100vw;
+	height: 100vh;
+}
+
 main p
 {
 	-webkit-touch-callout: none;
