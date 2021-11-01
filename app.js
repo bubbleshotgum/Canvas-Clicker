@@ -1,9 +1,20 @@
-function dump(elem, x, y)
+function dump(elem, num, x, y)
 {
-	elem.style.background = 'url(assets/backgrounds/' + Math.floor(Math.random() * 4 + 1) + '.png) ' + x + 'px ' + y + 'px no-repeat'
+	elem.style.background = (elem.style.background) ? 
+		'url(assets/backgrounds/' + num + '.png) ' + x + 'px ' + y + 'px no-repeat, ' + elem.style.background : 
+		'url(assets/backgrounds/' + num + '.png) ' + x + 'px ' + y + 'px no-repeat'
 	elem.style.backgroundSize = 'contain' 
 }
 
+function _listener(event) {
+	dump(event.currentTarget, window.num, event.clientX, event.clientY)
+}
+
+function listener(event) {
+	window.num = Math.floor(Math.random() * 4 + 1)
+	dump(event.currentTarget, window.num, event.clientX, event.clientY)
+	document.querySelector('main').addEventListener('mousemove', _listener)
+}
 
 window.addEventListener('load', function() {
 	console.log('All resources finished loading')
@@ -24,6 +35,7 @@ window.addEventListener('load', function() {
 		_shift(-1)}, 1000)
 })
 
-document.querySelector('main').addEventListener('mousedown', function(event) {
-	dump(this, event.clientX, event.clientY)
+document.querySelector('main').addEventListener('mousedown', listener)
+document.querySelector('main').addEventListener('mouseup', function(event) {
+	this.removeEventListener('mousemove', _listener)
 })
