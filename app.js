@@ -3,7 +3,8 @@ function dump(elem, num, x, y)
 	elem.style.background = (elem.style.background) ? 
 		'url(assets/backgrounds/' + num + '.png) ' + x + 'px ' + y + 'px no-repeat, ' + elem.style.background : 
 		'url(assets/backgrounds/' + num + '.png) ' + x + 'px ' + y + 'px no-repeat'
-	elem.style.backgroundSize = '25%' 
+	elem.style.backgroundSize = '25%'
+	elem.children 
 }
 
 function _listener(event) {
@@ -26,8 +27,6 @@ window.addEventListener('load', function() {
 			__px = px + window.innerWidth
 			if (-1 * px >= window.innerWidth)
 				_px = window.innerWidth + px
-			if (-1 * px >= window.innerWidth)
-				__px = window.innerWidth + px
 			bgFixed[0].style.transform = 'translateX(' + _px + 'px)'
 			bgFixed[1].style.transform = 'translateX(' + __px + 'px)'
 			shift = setTimeout(() => {_shift(_px - 4)}, 20)
