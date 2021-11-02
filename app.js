@@ -3,8 +3,7 @@ function dump(elem, num, x, y)
 	elem.style.background = (elem.style.background) ? 
 		'url(assets/backgrounds/' + num + '.png) ' + x + 'px ' + y + 'px no-repeat, ' + elem.style.background : 
 		'url(assets/backgrounds/' + num + '.png) ' + x + 'px ' + y + 'px no-repeat'
-	elem.style.backgroundSize = '25%'
-	elem.children 
+	elem.style.backgroundSize = 'contain'
 }
 
 function _listener(event) {
@@ -18,19 +17,31 @@ function listener(event) {
 }
 
 window.addEventListener('load', function() {
-	console.log('All resources finished loading')
-	const bgFixed = document.querySelectorAll('.background-fixed')
-	let shift = setTimeout(() => {
-		function _shift(px) 
-		{ 
-			let _px = px
-			if (-1 * px >= window.innerWidth)
-				_px = window.innerWidth + px
-			bgFixed[0].style.transform = 'translateX(' + _px + 'px)'
-			bgFixed[1].style.transform = 'translateX(' + (_px + window.innerWidth) + 'px)'
-			shift = setTimeout(() => {_shift(_px - 4)}, 20)
+	const bgFixed = document.getElementsByClassName('background-fixed')
+	let start = null,
+		checker = window.innerWidth
+
+	function step(frame)
+	{
+		if(!start) 
+			start = frame
+		let progress = frame - start
+		if(progress / 8 >= checker)
+		{
+			bgFixed[0].style.transform = 'translateX(0)'
+			bgFixed[1].style.transform = 'translateX(' + window.innerWidth + 'px)'
+			checker += window.innerWidth
 		}
-		_shift(-1)}, 1000)
+		else
+		{
+			bgFixed[0].style.transform = 'translateX(' + (checker - window.innerWidth - progress / 8) + 'px)'
+			bgFixed[1].style.transform = 'translateX(' + (checker - progress / 8) + 'px)'
+		}
+
+		window.requestAnimationFrame(step)
+	}
+
+	window.requestAnimationFrame(step)
 })
 
 document.querySelector('main').addEventListener('mousedown', listener)
