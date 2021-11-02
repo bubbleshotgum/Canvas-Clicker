@@ -23,12 +23,11 @@ window.addEventListener('load', function() {
 	let shift = setTimeout(() => {
 		function _shift(px) 
 		{ 
-			let _px = px,
-			__px = px + window.innerWidth
+			let _px = px
 			if (-1 * px >= window.innerWidth)
 				_px = window.innerWidth + px
 			bgFixed[0].style.transform = 'translateX(' + _px + 'px)'
-			bgFixed[1].style.transform = 'translateX(' + __px + 'px)'
+			bgFixed[1].style.transform = 'translateX(' + (_px + window.innerWidth) + 'px)'
 			shift = setTimeout(() => {_shift(_px - 4)}, 20)
 		}
 		_shift(-1)}, 1000)
