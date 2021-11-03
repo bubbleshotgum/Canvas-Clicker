@@ -17,6 +17,12 @@
 	background-size: contain;
 	position: fixed;
 }
+main canvas
+{
+	position: absolute;
+	z-index: -1;
+	top: 0;
+}
 
 main
 {
