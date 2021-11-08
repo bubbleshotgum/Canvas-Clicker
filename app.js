@@ -1,14 +1,25 @@
-let bounds = [[684, 856], [684, 856], [1138, 1138], [1080, 1165], [600, 450], [400, 260]],
-	buff = null
+let buff = null
 
 function dump(num, x, y)
 {
 	let img = new Image()
+
 	img.onload = function() 
-	{ window.canvas.getContext('2d').drawImage(
-		img, 
-		x - bounds[window.num - 1][0] / 2,
-		y - bounds[window.num - 1][1] / 2)
+	{ 
+		let _width = Math.min(
+				img.width * window.min, 
+				600, 
+				window.outerWidth / 2),
+			_height = Math.min(
+				img.height * window.min, 
+				img.height / img.width * 600, 
+				img.height / img.width * window.outerWidth / 2)
+		window.canvas.getContext('2d').drawImage(
+			img, 
+			x - _width / 2,
+			y - _height / 2,
+			_width,
+			_height)
 	}
 	img.src = './assets/backgrounds/' + window.num + '.png'
 }
@@ -19,8 +30,10 @@ function _listener(event) {
 
 function listener(event) {
 	window.num = Math.floor(Math.random() * 6 + 1)
+	window.min = Math.min(Math.random() + .5, 1)
 	dump(window.num, event.clientX, event.clientY)
 	document.querySelector('main').addEventListener('mousemove', _listener)
+	document.querySelector('main').addEventListener('touchmove', _listener)
 }
 
 window.addEventListener('load', function() {
@@ -65,7 +78,11 @@ window.addEventListener('load', function() {
 	})
 
 	document.querySelector('main').addEventListener('mousedown', listener)
+	document.querySelector('main').addEventListener('touchstart', listener)
 	document.querySelector('main').addEventListener('mouseup', function(event) {
+		this.removeEventListener('mousemove', _listener)
+	})
+	document.querySelector('main').addEventListener('touchebd', function(event) {
 		this.removeEventListener('mousemove', _listener)
 	})
 })

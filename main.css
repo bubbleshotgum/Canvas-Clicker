@@ -11,10 +11,7 @@
 	/*margin: .1px;*/
 	width: 100vw;
 	height: 40vh;
-	background: 
-	linear-gradient(45deg, hsla(20, 85%, 40%, .8) 1%, hsla(190, 50%, 20%, .9) 60%)
-	/*url("assets/background-fixed.png")*/ center center no-repeat;
-	background-size: contain;
+	background: linear-gradient(45deg, hsla(20, 85%, 40%, .8) 1%, hsla(190, 50%, 20%, .9) 60%) center center no-repeat;
 	position: fixed;
 }
 main canvas
